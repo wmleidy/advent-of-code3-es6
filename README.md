@@ -1,2 +1,5 @@
-# advent-of-code3-es6
-Solutions to Eric Wastl's Advent of Code (2017) in ECMAScript 6
+# Advent of Code, Year Three - ECMAScript 6 Solutions (with Node.js)
+
+Third time around I’m doing the wonderful problems provided by Eric Wastl on his [Advent of Code](http://adventofcode.com/) website. My goal for the [first year](https://github.com/wmleidy/advent-of-code-ruby) was putting all the basic CS knowledge (data structures, algorithms) I was learning into action with a language I was very comfortable with (Ruby). My goal during the [second year](https://github.com/wmleidy/advent-of-code2-coffee) was to deepen my knowledge of CoffeeScript, which I use quite frequently in my job. While 98% of the JavaScript I write is still in CoffeeScript, sooner or later ECMAScript 6 will become something that I program in on a daily basis, so my goal for this year is to take some solid steps to learning idiomatically ES6 (and have fun too, of course).
+
+Just as with the previous two years, on particularly interesting days, I check the solution megathread in the [AoC subreddit](https://www.reddit.com/r/adventofcode/) after completing the problem and will occasionally include these findings at the bottom of my files.
