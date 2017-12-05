@@ -75,3 +75,65 @@ console.log(manhattanDistance(finalX, finalY));
 // Part One - Approach Two
 
 // Since, as it turns out, the pattern/math approach is futile for Part Two, let's fill in the grid stepwise for Part One and tweak for Part Two.
+
+function findSquares(limit) {
+  let squares = [0];
+  let i = 1;
+  while (true) {
+    nextSquare = Math.pow(i, 2);
+    squares.push(nextSquare);
+    i++;
+    if (nextSquare > limit) { break; }
+  }
+  return squares;
+}
+
+function createGrid(totalCells) {
+  var x = 0, y = 0, counter = 1, spiralCounter = 0;
+  var perfectSquare, squareRoot, inflectionPoint;
+  var perfectSquares = findSquares(totalCells);
+  var grid = ["n/a", {value: counter, x: x, y: y}];
+
+  while (counter <= totalCells) {
+    if (perfectSquares.indexOf(counter) > -1) {
+      perfectSquare = counter;
+      squareRoot = perfectSquares.indexOf(counter);
+      inflectionPoint = squareRoot + 1;
+      nextTurn = perfectSquares[squareRoot + 1];
+      spiralCounter = 0;
+
+      if (squareRoot % 2 === 0) {
+        while (counter !== nextTurn) {
+          spiralCounter++;
+          counter++;
+          if (spiralCounter === 1) {
+            x--;
+          } else if (spiralCounter <= inflectionPoint) {
+            y--;
+          } else {
+            x++;
+          }
+          grid[counter] = { value: counter, x: x, y: y };
+        }
+      } else {
+        while (counter !== nextTurn) {
+          spiralCounter++;
+          counter++;
+          if (spiralCounter === 1) {
+            x++;
+          } else if (spiralCounter <= inflectionPoint) {
+            y++;
+          } else {
+            x--;
+          }
+          grid[counter] = { value: counter, x: x, y: y };
+        }
+      }
+    }
+  }
+  return grid;
+}
+
+var {x,y} = createGrid(input)[input];
+console.log(manhattanDistance(x, y));
+
