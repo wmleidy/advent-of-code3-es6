@@ -137,3 +137,74 @@ function createGrid(totalCells) {
 var {x,y} = createGrid(input)[input];
 console.log(manhattanDistance(x, y));
 
+function createGrid2(upperLimit) {
+  var x = 0, y = 0, counter = 1, spiralCounter = 0, value = 1;
+  var perfectSquare, squareRoot, inflectionPoint;
+  var perfectSquares = findSquares(upperLimit);
+  var grid = ["n/a", {value: value, x: x, y: y}];
+
+  while (true) {
+    if (perfectSquares.indexOf(counter) > -1) {
+      perfectSquare = counter;
+      squareRoot = perfectSquares.indexOf(counter);
+      inflectionPoint = squareRoot + 1;
+      nextTurn = perfectSquares[squareRoot + 1];
+      spiralCounter = 0;
+
+      if (squareRoot % 2 === 0) {
+        while (counter !== nextTurn) {
+          spiralCounter++;
+          counter++;
+          if (spiralCounter === 1) {
+            x--;
+          } else if (spiralCounter <= inflectionPoint) {
+            y--;
+          } else {
+            x++;
+          }
+          value = sumAdjacentValues(grid, x, y);
+          grid[counter] = { value: value, x: x, y: y };
+          if (value > upperLimit) {
+            return value;
+          }
+        }
+      } else {
+        while (counter !== nextTurn) {
+          spiralCounter++;
+          counter++;
+          if (spiralCounter === 1) {
+            x++;
+          } else if (spiralCounter <= inflectionPoint) {
+            y++;
+          } else {
+            x--;
+          }
+          value = sumAdjacentValues(grid, x, y);
+          grid[counter] = { value: value, x: x, y: y };
+          if (value > upperLimit) {
+            return value;
+          }
+        }
+      }
+    }
+  }
+}
+
+function sumAdjacentValues (grid, x, y) {
+  let adjacentSquares = grid.filter(i =>
+      (i.x === x + 1 && i.y === y    ) ||
+      (i.x === x + 1 && i.y === y + 1) ||
+      (i.x === x + 1 && i.y === y - 1) ||
+      (i.x === x     && i.y === y + 1) ||
+      (i.x === x     && i.y === y - 1) ||
+      (i.x === x - 1 && i.y === y    ) ||
+      (i.x === x - 1 && i.y === y + 1) ||
+      (i.x === x - 1 && i.y === y - 1)
+    )
+
+  return adjacentSquares.reduce(function(sum, i) {
+    return sum += i.value;
+  }, 0);
+}
+
+console.log(createGrid2(input));
